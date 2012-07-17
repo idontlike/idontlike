@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://idontlike.github.com/idontlike/atom.xml" rel="self"/>
   <link href="http://idontlike.github.com/idontlike/"/>
-  <updated>2012-07-17T22:51:29+03:00</updated>
+  <updated>2012-07-17T23:23:48+03:00</updated>
   <id>http://idontlike.github.com/idontlike/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[privet]]></title>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/07/17/privet/"/>
+    <updated>2012-07-17T23:08:00+03:00</updated>
+    <id>http://idontlike.github.com/idontlike/blog/2012/07/17/privet</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[your_post_title_here]]></title>
