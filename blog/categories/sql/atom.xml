@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sql | iDontLike]]></title>
   <link href="http://idontlike.github.com/idontlike/blog/categories/sql/atom.xml" rel="self"/>
   <link href="http://idontlike.github.com/idontlike/"/>
-  <updated>2012-07-21T17:51:20+03:00</updated>
+  <updated>2012-07-21T19:52:12+03:00</updated>
   <id>http://idontlike.github.com/idontlike/</id>
   <author>
     <name><![CDATA[Ilia Kohanovski]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hibernate can log sql queries beautifully]]></title>
-    <link href="http://idontlike.github.com/idontlike/blog/2012/07/21/hibernate-can-log-sql-queres-beautifully/"/>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/07/21/hibernate-can-log-sql-queries-beautifully/"/>
     <updated>2012-07-21T17:40:00+03:00</updated>
-    <id>http://idontlike.github.com/idontlike/blog/2012/07/21/hibernate-can-log-sql-queres-beautifully</id>
+    <id>http://idontlike.github.com/idontlike/blog/2012/07/21/hibernate-can-log-sql-queries-beautifully</id>
     <content type="html"><![CDATA[<p>There's some features about <strong>hibernate logging system</strong>, that not every developer know about.</p>
 
 <p>If you have read hibernate doc (sure you did!), you see that hibernate uses <a href="http://www.slf4j.org/">slf4j</a> for logging. Sometimes you want to see sql queries that are running when your app is executed. So you set <strong>org.hibernate.SQL</strong> to <strong>debug</strong> mode and see something like this:</p>
