@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[iDontLike]]></title>
-  <link href="http://idontlike.github.com/idontlike/atom.xml" rel="self"/>
+  <title><![CDATA[Category: sql | iDontLike]]></title>
+  <link href="http://idontlike.github.com/idontlike/blog/categories/sql/atom.xml" rel="self"/>
   <link href="http://idontlike.github.com/idontlike/"/>
   <updated>2012-07-21T17:51:20+03:00</updated>
   <id>http://idontlike.github.com/idontlike/</id>
@@ -18,14 +18,14 @@
     <link href="http://idontlike.github.com/idontlike/blog/2012/07/21/hibernate-can-log-sql-queres-beautifully/"/>
     <updated>2012-07-21T17:40:00+03:00</updated>
     <id>http://idontlike.github.com/idontlike/blog/2012/07/21/hibernate-can-log-sql-queres-beautifully</id>
-    <content type="html"><![CDATA[<p>There&#8217;s some features about <strong>hibernate logging system</strong>, that not every developer know about.</p>
+    <content type="html"><![CDATA[<p>There's some features about <strong>hibernate logging system</strong>, that not every developer know about.</p>
 
 <p>If you have read hibernate doc (sure you did!), you see that hibernate uses <a href="http://www.slf4j.org/">slf4j</a> for logging. Sometimes you want to see sql queries that are running when your app is executed. So you set <strong>org.hibernate.SQL</strong> to <strong>debug</strong> mode and see something like this:</p>
 
 <pre><code>02:13:50,847 DEBUG SQL:401 ? select shift0_.uid as uid1_1_, shift0_.create_d as create2_1_1_, shift0_.edit_d as edit3_1_1_, shift0_.label as label1_1_, shift0_.employee as employee1_1_, shift0_.name as name1_1_, employee1_.uid as uid0_0_, employee1_.create_d as create2_0_0_, employee1_.edit_d as edit3_0_0_, employee1_.label as label0_0_, employee1_.employee_name as employee5_0_0_ from shift shift0_ inner join employee employee1_ on shift0_.employee=employee1_.uid where shift0_.uid=?
 </code></pre>
 
-<p>Now you understand that it is <a href="http://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html">prepared sql statement</a> and &#8216;?&#8217; should be replaced by some parameter value. But what the value is? After searching a bit, you find that <strong>org.hibernate.type=debug</strong> is your weapon here.
+<p>Now you understand that it is <a href="http://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html">prepared sql statement</a> and '?' should be replaced by some parameter value. But what the value is? After searching a bit, you find that <strong>org.hibernate.type=debug</strong> is your weapon here.
 So</p>
 
 <pre><code>02:25:48,216 DEBUG StringType:133 ? binding '8' to parameter: 1
@@ -33,9 +33,9 @@ So</p>
 
 <p>is added to your logging pearl.</p>
 
-<p>OK. Someone find <strong><code>&lt;property name="hibernate.show_sql"&gt;true&lt;/property&gt;</code></strong> in hibernate.cfg.xml file or in spring config file or find <strong><code>&lt;property name="show_sql" value="true"/&gt;</code></strong> in persistence.xml file. What does it for? - Wonders the &#8220;someone&#8221;. The answer: it&#8217;s tracing the sql query like &#8220;org.hibernate.SQL=debug&#8221; do, but it is printing to stdout. I don&#8217;t find this useful because you always can use slf4j for make the same stuff, but you have more capabilities here (to write to a file for example).</p>
+<p>OK. Someone find <strong><code>&lt;property name="hibernate.show_sql"&gt;true&lt;/property&gt;</code></strong> in hibernate.cfg.xml file or in spring config file or find <strong><code>&lt;property name="show_sql" value="true"/&gt;</code></strong> in persistence.xml file. What does it for? - Wonders the "someone". The answer: it's tracing the sql query like "org.hibernate.SQL=debug" do, but it is printing to stdout. I don't find this useful because you always can use slf4j for make the same stuff, but you have more capabilities here (to write to a file for example).</p>
 
-<p>Finally we are comming to the interesting part. Not everyone knows! You can define property <strong><property name="hibernate.format_sql">true</property></strong> and yahoo&#8230;the sql is looking much more beatifull:</p>
+<p>Finally we are comming to the interesting part. Not everyone knows! You can define property <strong><property name="hibernate.format_sql">true</property></strong> and yahoo...the sql is looking much more beatifull:</p>
 
 <pre><code>02:31:37,228 DEBUG SQL:401 ? 
     select
@@ -59,23 +59,7 @@ So</p>
         shift0_.uid=?`
 </code></pre>
 
-<p>It&#8217;s working as for <em>slf4j</em> defined parameter, as for <em>show_sql</em> property.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[privet]]></title>
-    <link href="http://idontlike.github.com/idontlike/blog/2012/07/17/Hello-Blog/"/>
-    <updated>2012-07-17T23:08:00+03:00</updated>
-    <id>http://idontlike.github.com/idontlike/blog/2012/07/17/Hello-Blog</id>
-    <content type="html"><![CDATA[<p>I happy to announce my blog birth.</p>
-
-<p>It&#8217;s about all the fucking stuff i face with during my programmer life. (There is a lot of things aside from programming that i don&#8217;t like, but there is to much for a blog).</p>
-
-<p>This is for me, and i don&#8217;t sure it will be really public sometime.
-I will collect here observations about different technology stuff (that i don&#8217;t like), about it behaviour in different situations (obviuosly fucking situations), some interesting issues, some maybe useful solutions&#8230;</p>
-
-<p>Yahooo!!</p>
+<p>It's working as for <em>slf4j</em> defined parameter, as for <em>show_sql</em> property.</p>
 ]]></content>
   </entry>
   
