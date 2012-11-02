@@ -1,0 +1,13 @@
+---
+layout: post
+title: "The Scene, and how to delete locked files in Windows"
+date: 2012-11-02 02:08
+comments: true
+categories: ["The Scene","Windows","win terminal"]
+---
+Did you see [The Scene](http://www.imdb.com/title/tt2201890/)? What a pity. Very unique movie. May be i will write a post about this and all i think about this. But is it in format of the blog?
+
+So, i have just looked episode 13 (the most geeky episode for now). And learned some interesting command for windows shell lol :). **forcedel** - deletes file even if it is used by some process.
+
+I will try it when will be on Windows. Interesting, how the program will crashed that writing for this file for example :).
+
