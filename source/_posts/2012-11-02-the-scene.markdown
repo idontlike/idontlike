@@ -5,9 +5,10 @@ date: 2012-11-02 02:08
 comments: true
 categories: ["The Scene","Windows","win terminal"]
 ---
-Did you see [The Scene](http://www.imdb.com/title/tt2201890/)? No? Sorry for you. Cool movie, with original concept, and while it's original and strange it still looks interesting (by suprise!). II need a post for this movie (i have some thoughts about it). 
+Did you see [The Scene](http://www.imdb.com/title/tt2201890/)? You should get a try. It is very original, looks geeky, but instead of all this it is still interesting (that is suprising).
+I have some thoughts about the movie and should share in a separate post.
 
-So, i have just looked episode 13 (the most geeky episode by now). And learned some interesting command for windows shell lol :). **forcedel** - deletes file even if it is used by some process.
+So, i have just looked episode 13 (the most geeky episode by now). And learned some interesting command for windows shell lol :). `forcedel` - deletes file even if it is used by some process.
 
-I will try it when will be on Windows. Interesting, how the program will crashed that writing for this file for example :).
+I will try it when will be on Windows. Interesting, how programs crash trying to write to the file that is deleted unexpectedly.
 

@@ -5,6 +5,8 @@ date: 2012-11-16 19:55
 comments: true
 categories: [octopress,markdown,code highlighting]
 ---
+### How to insert code blocks in Octopress. Quick tutorial with examples.
+<!-- more -->
 *Example:*
 		no higlighted code block (4 spaces ident or tab) (<pre> element in html)
 ==>
