@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: eclipse | iDontLike]]></title>
+  <link href="http://idontlike.github.com/idontlike/blog/categories/eclipse/atom.xml" rel="self"/>
+  <link href="http://idontlike.github.com/idontlike/"/>
+  <updated>2012-12-19T02:37:19+02:00</updated>
+  <id>http://idontlike.github.com/idontlike/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    <email><![CDATA[adsurbum@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[deploy with ant in eclipse]]></title>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/11/18/deploy-with-ant-in-eclipse/"/>
+    <updated>2012-11-18T22:02:00+02:00</updated>
+    <id>http://idontlike.github.com/idontlike/blog/2012/11/18/deploy-with-ant-in-eclipse</id>
+    <content type="html"><![CDATA[<p>Trying to deploy project with ant in eclipse and getting depressing exception like</p>
+
+<p><code>taskdef class org.apache.catalina.ant.DeployTask cannot be found using the classloader AntClassLoader[]</code></p>
+
+<h3>The solution:</h3>
+
+<p>Run as -> Classpath -> add External Jars -> ...\tomcat\lib\catalina-ant.jar</p>
+]]></content>
+  </entry>
+  
+</feed>

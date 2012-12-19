@@ -1,0 +1,549 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iDontLike</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Sometimes small things makes a big difference. I suggest to add (if you have no) debug="true" to your javac command in ant. ">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://idontlike.github.com/idontlike/">
+  <link href="/idontlike/favicon.png" rel="icon">
+  <link href="/idontlike/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/idontlike/javascripts/modernizr-2.0.js"></script>
+  <script src="/idontlike/javascripts/ender.js"></script>
+  <script src="/idontlike/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/idontlike/atom.xml" rel="alternate" title="iDontLike" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/idontlike/">iDontLike</a></h1>
+  
+    <h2>this f@cking shit</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/idontlike/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:idontlike.github.com/idontlike" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/idontlike/">Blog</a></li>
+  <li><a href="/idontlike/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/idontlike/blog/2012/12/18/tip-for-building-your-app-with-ant-unknow-source-pisses-you-off/">Tip for Building Your App With Ant (Unknow Source Pisses You Off? - Turn Debug Flag On)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-18T21:29:00+02:00" pubdate data-updated="true">Dec 18<span>th</span>, 2012</time>
+        
+         | <a href="/idontlike/blog/2012/12/18/tip-for-building-your-app-with-ant-unknow-source-pisses-you-off/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Sometimes small things makes a big difference.</p>
+
+<p>I suggest to add (if you have no) <code>debug="true"</code> to your <code>javac</code> command in ant.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/idontlike/blog/2012/12/18/tip-for-building-your-app-with-ant-unknow-source-pisses-you-off/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/idontlike/blog/2012/11/23/spring-transactional-pitfall/">Spring Transactional Pitfall</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-23T15:09:00+02:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
+        
+         | <a href="/idontlike/blog/2012/11/23/spring-transactional-pitfall/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I saw such code written by experienced programmers:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Transactional</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">doInsert</span><span class="o">(..)</span> <span class="kd">throws</span> <span class="n">DaoLayerException</span><span class="o">{</span>
+</span><span class='line'>  <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>      <span class="c1">//insert..</span>
+</span><span class='line'>      <span class="c1">//update..</span>
+</span><span class='line'>      <span class="c1">//whatsoever..</span>
+</span><span class='line'>  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">DaoLayerException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/idontlike/blog/2012/11/23/spring-transactional-pitfall/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/idontlike/blog/2012/11/18/deploy-with-ant-in-eclipse/">Deploy With Ant in Eclipse</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-18T22:02:00+02:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time>
+        
+         | <a href="/idontlike/blog/2012/11/18/deploy-with-ant-in-eclipse/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Trying to deploy project with ant in eclipse and getting depressing exception like</p>
+
+<p><code>taskdef class org.apache.catalina.ant.DeployTask cannot be found using the classloader AntClassLoader[]</code></p>
+
+<h3>The solution:</h3>
+
+<p>Run as -> Classpath -> add External Jars -> &#8230;\tomcat\lib\catalina-ant.jar</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/idontlike/blog/2012/11/16/code-blocks-in-octopress/">Insert Code Blocks in Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-16T19:55:00+02:00" pubdate data-updated="true">Nov 16<span>th</span>, 2012</time>
+        
+         | <a href="/idontlike/blog/2012/11/16/code-blocks-in-octopress/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>How to insert code blocks in Octopress. Quick tutorial with examples.</h3>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/idontlike/blog/2012/11/16/code-blocks-in-octopress/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/idontlike/blog/2012/11/16/run-project-in-jetty-with-maven/">Run Project in Jetty With Maven</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-16T19:47:00+02:00" pubdate data-updated="true">Nov 16<span>th</span>, 2012</time>
+        
+         | <a href="/idontlike/blog/2012/11/16/run-project-in-jetty-with-maven/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>add to <em>pom.xml</em> under <em>&lt;plugins></em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;plugin&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.mortbay.jetty<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>maven-jetty-plugin<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'><span class="nt">&lt;/plugin&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and run</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mvn jetty:run
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/idontlike/blog/2012/11/09/mysql-sucks/">Mysql Sucks</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-09T00:19:00+02:00" pubdate data-updated="true">Nov 9<span>th</span>, 2012</time>
+        
+         | <a href="/idontlike/blog/2012/11/09/mysql-sucks/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Did you know?</h2>
+
+<p>Adding index to a table in mysql locks entire table for writing.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/idontlike/blog/2012/11/09/mysql-sucks/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/idontlike/blog/2012/11/02/the-scene/">The Scene, and How to Delete Locked Files in Windows</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-02T02:08:00+02:00" pubdate data-updated="true">Nov 2<span>nd</span>, 2012</time>
+        
+         | <a href="/idontlike/blog/2012/11/02/the-scene/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Did you see <a href="http://www.imdb.com/title/tt2201890/">The Scene</a>? You should get a try. It is very original, looks geeky, but instead of all this it is still interesting (that is suprising).
+I have some thoughts about the movie and should share in a separate post.</p>
+
+<p>So, i have just looked episode 13 (the most geeky episode by now). And learned some interesting command for windows shell lol :). <code>forcedel</code> - deletes file even if it is used by some process.</p>
+
+<p>I will try it when will be on Windows. Interesting, how programs crash trying to write to the file that is deleted unexpectedly.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/idontlike/blog/2012/10/31/kill-process-running-on-specific-port-in-windows/">Kill &#8220;8080 Process&#8221;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-31T21:11:00+02:00" pubdate data-updated="true">Oct 31<span>st</span>, 2012</time>
+        
+         | <a href="/idontlike/blog/2012/10/31/kill-process-running-on-specific-port-in-windows/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ol>
+<li>open <em>cmd.exe</em> as admin (start->search cmd&#8230;right click)</li>
+<li>netstat -a -n -o |findstr :8080</li>
+<li>TaskKill.exe /f /PID ###</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/idontlike/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/idontlike/blog/2012/12/18/tip-for-building-your-app-with-ant-unknow-source-pisses-you-off/">Tip for building your app with ant (Unknow Source pisses you off? - turn debug flag on)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/idontlike/blog/2012/11/23/spring-transactional-pitfall/">spring transactional pitfall</a>
+      </li>
+    
+      <li class="post">
+        <a href="/idontlike/blog/2012/11/18/deploy-with-ant-in-eclipse/">deploy with ant in eclipse</a>
+      </li>
+    
+      <li class="post">
+        <a href="/idontlike/blog/2012/11/16/code-blocks-in-octopress/">insert code blocks in octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/idontlike/blog/2012/11/16/run-project-in-jetty-with-maven/">run project in jetty with maven</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'idontlike';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

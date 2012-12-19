@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mysql | iDontLike]]></title>
+  <link href="http://idontlike.github.com/idontlike/blog/categories/mysql/atom.xml" rel="self"/>
+  <link href="http://idontlike.github.com/idontlike/"/>
+  <updated>2012-12-19T02:37:19+02:00</updated>
+  <id>http://idontlike.github.com/idontlike/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    <email><![CDATA[adsurbum@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[mysql sucks]]></title>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/11/09/mysql-sucks/"/>
+    <updated>2012-11-09T00:19:00+02:00</updated>
+    <id>http://idontlike.github.com/idontlike/blog/2012/11/09/mysql-sucks</id>
+    <content type="html"><![CDATA[<h2>Did you know?</h2>
+
+<p>Adding index to a table in mysql locks entire table for writing.</p>
+
+<!-- more -->
+
+
+<p>When you'r altering some table in mysql, maybe adding column or even just adding index <em>entire table is locked for writing</em>. That mean, if adding index takes 5 minutes, nobody will able to write to any row on the table anithing during this 5 minutes.</p>
+
+<p>You know what? Do you have heavy update statement that runs every 5 minutes? Do with this something, because <strong>whole the table is locked</strong>. Do you want to execute delete statement that takes a lot of time? Think twice. Test the behavior on development server. I have tried <code>delete from some_table where not_indexed_column like '%a%b%'"</code>. It takes a lot of time. And i can't execute any other update query in this time.</p>
+
+<p>Okey, now you will go to the <a href="http://dev.mysql.com/doc/refman/5.0/en/innodb-locks-set.html">manual</a></p>
+
+<blockquote><p>A locking read, an UPDATE, or a DELETE generally set record locks on every index record that is scanned in the processing of the SQL statement. It does not matter whether there are WHERE conditions in the statement that would exclude the row.</p></blockquote>
+
+<p>I have lied (everybody lies (c) dr. House). Not allways all tables are locked, but those that are scanned by mysql during the query process. (so don't forget to add indexes. It not only speed ups the query run, but makes it possible to others queries to be executed and not stucked waiting for a lock free).</p>
+
+<p>You know there is some work arounds for altering table without locking (or with less locking time). For example you can play with temporary table making altering there and synchronizing after with original. So you can drop the original table and rename the temporary at the end.</p>
+
+<p>I don't give solutions here. Just warn you. And emphasize that <strong>i don't like</strong> it.</p>
+]]></content>
+  </entry>
+  
+</feed>

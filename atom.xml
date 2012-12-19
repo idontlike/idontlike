@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[iDontLike]]></title>
+  <link href="http://idontlike.github.com/idontlike/atom.xml" rel="self"/>
+  <link href="http://idontlike.github.com/idontlike/"/>
+  <updated>2012-12-19T02:37:19+02:00</updated>
+  <id>http://idontlike.github.com/idontlike/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    <email><![CDATA[adsurbum@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tip for building your app with ant (Unknow Source pisses you off? - turn debug flag on)]]></title>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/12/18/tip-for-building-your-app-with-ant-unknow-source-pisses-you-off/"/>
+    <updated>2012-12-18T21:29:00+02:00</updated>
+    <id>http://idontlike.github.com/idontlike/blog/2012/12/18/tip-for-building-your-app-with-ant-unknow-source-pisses-you-off</id>
+    <content type="html"><![CDATA[<p>Sometimes small things makes a big difference.</p>
+
+<p>I suggest to add (if you have no) <code>debug="true"</code> to your <code>javac</code> command in ant.</p>
+
+<!-- more -->
+
+
+<p>Otherwise exception stacktrace will piss you off with something like <code>com.idontlike.fuck(Unknown Source)</code>. You want line numbers instead of <code>Unknow Source</code>. Doesn&#8217;t you?</p>
+
+<p>By the way. After this small change you can know param names in Methods by reflection. Spring implemented ParameterNameDiscoverer for you that do the stuff. Debug flag should be turned on for this feature.</p>
+
+<p>So if you have method <code>public privet(String name, Integer bu)</code>,
+<code>parameterNameDiscoverer.getParameterNames(method)</code> will return [name,bu]. Can be usefull.</p>
+
+<p>It looks that debug flag doesn&#8217;t have perfomace overhead (only on startup load). (http://stackoverflow.com/a/218194/510089)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[spring transactional pitfall]]></title>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/11/23/spring-transactional-pitfall/"/>
+    <updated>2012-11-23T15:09:00+02:00</updated>
+    <id>http://idontlike.github.com/idontlike/blog/2012/11/23/spring-transactional-pitfall</id>
+    <content type="html"><![CDATA[<p>I saw such code written by experienced programmers:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Transactional</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">doInsert</span><span class="o">(..)</span> <span class="kd">throws</span> <span class="n">DaoLayerException</span><span class="o">{</span>
+</span><span class='line'>  <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>      <span class="c1">//insert..</span>
+</span><span class='line'>      <span class="c1">//update..</span>
+</span><span class='line'>      <span class="c1">//whatsoever..</span>
+</span><span class='line'>  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">DaoLayerException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!-- more -->
+
+
+<p>What&#8217;s wrong with this code? May be nothing wrong.
+But usually (sometimes) people doesn&#8217;t know that the transaction is not rolled back in the case of
+an exception.
+This happens because by the default <code>Transactional</code> annotation rolled back only in the case of <code>RuntimeException</code>.</p>
+
+<p>It is very dangerous pitfall, cause consistenсy of a data can suffer, unpredictable things can happen (except the case you сonscientiously cover a code with <code>unit-tests</code>). Even so the pitfall is easy to fall into :).</p>
+
+<p>By the way, the solution is:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Transactional</span><span class="o">(</span><span class="n">rollbackFor</span><span class="o">=</span><span class="n">Exception</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I googled and had found good article about <a href="http://www.ibm.com/developerworks/java/library/j-ts1/index.html">transaction pitfalls</a>. It is a bit old, but looks rellevant to present reality.</p>
+
+<p>The rule of thumb from the article about read only access to database: DON&#8217;T USE</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Transactional</span><span class="o">(</span><span class="n">readOnly</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span> <span class="c1">//don&#39;t use it</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Just don&#8217;t put Transactional annotation at all</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[deploy with ant in eclipse]]></title>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/11/18/deploy-with-ant-in-eclipse/"/>
+    <updated>2012-11-18T22:02:00+02:00</updated>
+    <id>http://idontlike.github.com/idontlike/blog/2012/11/18/deploy-with-ant-in-eclipse</id>
+    <content type="html"><![CDATA[<p>Trying to deploy project with ant in eclipse and getting depressing exception like</p>
+
+<p><code>taskdef class org.apache.catalina.ant.DeployTask cannot be found using the classloader AntClassLoader[]</code></p>
+
+<h3>The solution:</h3>
+
+<p>Run as -> Classpath -> add External Jars -> &#8230;\tomcat\lib\catalina-ant.jar</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[insert code blocks in octopress]]></title>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/11/16/code-blocks-in-octopress/"/>
+    <updated>2012-11-16T19:55:00+02:00</updated>
+    <id>http://idontlike.github.com/idontlike/blog/2012/11/16/code-blocks-in-octopress</id>
+    <content type="html"><![CDATA[<h3>How to insert code blocks in Octopress. Quick tutorial with examples.</h3>
+
+<!-- more -->
+
+
+<p><em>Example:</em></p>
+
+<pre><code>    no higlighted code block (4 spaces ident or tab) (&lt;pre&gt; element in html)
+</code></pre>
+
+<p>==></p>
+
+<pre><code>no higlighted code block (4 spaces ident or tab) (&lt;pre&gt; element in html)
+</code></pre>
+
+<hr />
+
+<p><em>Example:</em></p>
+
+<pre><code>``` 
+no highliting, with numbers
+:)
+```
+</code></pre>
+
+<p>==></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>no highliting, with numbers
+</span><span class='line'>:)</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p><em>Syntax:</em></p>
+
+<pre><code>``` [language] [title] [url] [link text]
+code snippet
+```
+</code></pre>
+
+<p><em>Example</em></p>
+
+<pre><code>```java Some Title http://fictive_url There is a link
+int a = 5;
+```
+</code></pre>
+
+<p>===></p>
+
+<figure class='code'><figcaption><span>Some Title </span><a href='http://fictive_url'>There is a link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+</span><span class='line'><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;That&#39;s it&quot;</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://octopress.org/docs/blogging/code/">MORE</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[run project in jetty with maven]]></title>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/11/16/run-project-in-jetty-with-maven/"/>
+    <updated>2012-11-16T19:47:00+02:00</updated>
+    <id>http://idontlike.github.com/idontlike/blog/2012/11/16/run-project-in-jetty-with-maven</id>
+    <content type="html"><![CDATA[<p>add to <em>pom.xml</em> under <em>&lt;plugins></em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;plugin&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.mortbay.jetty<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>maven-jetty-plugin<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'><span class="nt">&lt;/plugin&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and run</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mvn jetty:run
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[mysql sucks]]></title>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/11/09/mysql-sucks/"/>
+    <updated>2012-11-09T00:19:00+02:00</updated>
+    <id>http://idontlike.github.com/idontlike/blog/2012/11/09/mysql-sucks</id>
+    <content type="html"><![CDATA[<h2>Did you know?</h2>
+
+<p>Adding index to a table in mysql locks entire table for writing.</p>
+
+<!-- more -->
+
+
+<p>When you&#8217;r altering some table in mysql, maybe adding column or even just adding index <em>entire table is locked for writing</em>. That mean, if adding index takes 5 minutes, nobody will able to write to any row on the table anithing during this 5 minutes.</p>
+
+<p>You know what? Do you have heavy update statement that runs every 5 minutes? Do with this something, because <strong>whole the table is locked</strong>. Do you want to execute delete statement that takes a lot of time? Think twice. Test the behavior on development server. I have tried <code>delete from some_table where not_indexed_column like '%a%b%'"</code>. It takes a lot of time. And i can&#8217;t execute any other update query in this time.</p>
+
+<p>Okey, now you will go to the <a href="http://dev.mysql.com/doc/refman/5.0/en/innodb-locks-set.html">manual</a></p>
+
+<blockquote><p>A locking read, an UPDATE, or a DELETE generally set record locks on every index record that is scanned in the processing of the SQL statement. It does not matter whether there are WHERE conditions in the statement that would exclude the row.</p></blockquote>
+
+<p>I have lied (everybody lies (c) dr. House). Not allways all tables are locked, but those that are scanned by mysql during the query process. (so don&#8217;t forget to add indexes. It not only speed ups the query run, but makes it possible to others queries to be executed and not stucked waiting for a lock free).</p>
+
+<p>You know there is some work arounds for altering table without locking (or with less locking time). For example you can play with temporary table making altering there and synchronizing after with original. So you can drop the original table and rename the temporary at the end.</p>
+
+<p>I don&#8217;t give solutions here. Just warn you. And emphasize that <strong>i don&#8217;t like</strong> it.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Scene, and how to delete locked files in Windows]]></title>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/11/02/the-scene/"/>
+    <updated>2012-11-02T02:08:00+02:00</updated>
+    <id>http://idontlike.github.com/idontlike/blog/2012/11/02/the-scene</id>
+    <content type="html"><![CDATA[<p>Did you see <a href="http://www.imdb.com/title/tt2201890/">The Scene</a>? You should get a try. It is very original, looks geeky, but instead of all this it is still interesting (that is suprising).
+I have some thoughts about the movie and should share in a separate post.</p>
+
+<p>So, i have just looked episode 13 (the most geeky episode by now). And learned some interesting command for windows shell lol :). <code>forcedel</code> - deletes file even if it is used by some process.</p>
+
+<p>I will try it when will be on Windows. Interesting, how programs crash trying to write to the file that is deleted unexpectedly.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[kill "8080 process"]]></title>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/10/31/kill-process-running-on-specific-port-in-windows/"/>
+    <updated>2012-10-31T21:11:00+02:00</updated>
+    <id>http://idontlike.github.com/idontlike/blog/2012/10/31/kill-process-running-on-specific-port-in-windows</id>
+    <content type="html"><![CDATA[<ol>
+<li>open <em>cmd.exe</em> as admin (start->search cmd&#8230;right click)</li>
+<li>netstat -a -n -o |findstr :8080</li>
+<li>TaskKill.exe /f /PID ###</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>
