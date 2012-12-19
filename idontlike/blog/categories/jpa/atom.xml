@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jpa | iDontLike]]></title>
+  <link href="http://idontlike.github.com/idontlike/blog/categories/jpa/atom.xml" rel="self"/>
+  <link href="http://idontlike.github.com/idontlike/"/>
+  <updated>2012-12-19T01:19:11+02:00</updated>
+  <id>http://idontlike.github.com/idontlike/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    <email><![CDATA[adsurbum@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[spring transactional pitfall]]></title>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/11/23/spring-transactional-pitfall/"/>
+    <updated>2012-11-23T15:09:00+02:00</updated>
+    <id>http://idontlike.github.com/idontlike/blog/2012/11/23/spring-transactional-pitfall</id>
+    <content type="html"><![CDATA[<p>I saw such code written by experienced programmers:</p>
+
+<p>``` java
+@Transactional
+public void doInsert(..) throws DaoLayerException{</p>
+
+<pre><code>try {
+    //insert..
+    //update..
+    //whatsoever..
+} catch (Exception e) {
+    throw new DaoLayerException(e);
+} 
+</code></pre>
+
+<p>}
+```</p>
+
+<!-- more -->
+
+
+<p>What's wrong with this code? May be nothing wrong.
+But usually (sometimes) people doesn't know that the transaction is not rolled back in the case of
+an exception.
+This happens because by the default <code>Transactional</code> annotation rolled back only in the case of <code>RuntimeException</code>.</p>
+
+<p>It is very dangerous pitfall, cause consistenсy of a data can suffer, unpredictable things can happen (except the case you сonscientiously cover a code with <code>unit-tests</code>). Even so the pitfall is easy to fall into :).</p>
+
+<p>By the way, the solution is:
+<code>java
+@Transactional(rollbackFor=Exception.class)
+</code></p>
+
+<p>I googled and had found good article about <a href="http://www.ibm.com/developerworks/java/library/j-ts1/index.html">transaction pitfalls</a>. It is a bit old, but looks rellevant to present reality.</p>
+
+<p>The rule of thumb from the article about read only access to database: DON'T USE
+<code>java
+@Transactional(readOnly = true) //don't use it
+</code>
+Just don't put Transactional annotation at all</p>
+]]></content>
+  </entry>
+  
+</feed>

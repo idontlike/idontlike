@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: javac | iDontLike]]></title>
+  <link href="http://idontlike.github.com/idontlike/blog/categories/javac/atom.xml" rel="self"/>
+  <link href="http://idontlike.github.com/idontlike/"/>
+  <updated>2012-12-19T01:19:11+02:00</updated>
+  <id>http://idontlike.github.com/idontlike/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    <email><![CDATA[adsurbum@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tip for building your app with ant (Unknow Source pisses you off? - turn debug flag on)]]></title>
+    <link href="http://idontlike.github.com/idontlike/blog/2012/12/18/tip-for-building-your-app-with-ant-unknow-source-pisses-you-off/"/>
+    <updated>2012-12-18T21:29:00+02:00</updated>
+    <id>http://idontlike.github.com/idontlike/blog/2012/12/18/tip-for-building-your-app-with-ant-unknow-source-pisses-you-off</id>
+    <content type="html"><![CDATA[<p>Sometimes small things makes a big difference.</p>
+
+<p>I suggest to add (if you have no) <code>debug="true"</code> to your <code>javac</code> command in ant.</p>
+
+<!-- more -->
+
+
+<p>Otherwise exception stacktrace will piss you off with something like <code>com.idontlike.fuck(Unknown Source)</code>. You want line numbers instead of <code>Unknow Source</code>. Doesn't you?</p>
+
+<p>By the way. After this small change you can know param names in Methods by reflection. Spring implemented ParameterNameDiscoverer for you that do the stuff. Debug flag should be turned on for this feature.</p>
+
+<p>So if you have method <code>public privet(String name, Integer bu)</code>,
+<code>parameterNameDiscoverer.getParameterNames(method)</code> will return [name,bu]. Can be usefull.</p>
+
+<p>It looks that debug flag doesn't have perfomace overhead (only on startup load). (http://stackoverflow.com/a/218194/510089)</p>
+]]></content>
+  </entry>
+  
+</feed>
